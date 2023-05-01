@@ -208,6 +208,7 @@ func (c *Chain) preBuild(ctx context.Context, cacheStorage cache.Storage) (build
 	buildFlags = []string{
 		gocmd.FlagMod, gocmd.FlagModValueReadOnly,
 		gocmd.FlagLdflags, gocmd.Ldflags(ldFlags...),
+		"-buildvcs=false",
 	}
 
 	c.ev.Send("Installing dependencies...", events.ProgressUpdate())
