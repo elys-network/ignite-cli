@@ -69,7 +69,7 @@ func Determine(path string) (v Version, err error) {
 			if taggerTimestamp < obj.Tagger.When.Unix() {
 				taggerTimestamp = obj.Tagger.When.Unix()
 
-				tag = strings.TrimPrefix(obj.Name, "v")
+				tag = obj.Name
 				tagHash = obj.Target.String()
 			}
 		} else {
@@ -87,7 +87,7 @@ func Determine(path string) (v Version, err error) {
 			if taggerTimestamp < commit.Committer.When.Unix() {
 				taggerTimestamp = commit.Committer.When.Unix()
 
-				tag = strings.TrimPrefix(t.Name().Short(), "v")
+				tag = t.Name().Short()
 				tagHash = t.Hash().String()
 			}
 		}
