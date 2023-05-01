@@ -201,7 +201,7 @@ func (c *Chain) preBuild(ctx context.Context, cacheStorage cache.Storage) (build
 	ldFlags = append(ldFlags,
 		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.Name=%s", xstrings.Title(c.app.Name)),
 		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.AppName=%sd", c.app.Name),
-		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.Version=%s", c.sourceVersion.tag),
+		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.Version=v%s", c.sourceVersion.tag),
 		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.Commit=%s", c.sourceVersion.hash),
 		fmt.Sprintf("-X %s/cmd/%s/cmd.ChainID=%s", c.app.ImportPath, c.app.D(), chainID),
 	)
