@@ -214,7 +214,7 @@ func (c *Chain) preBuild(
 	ldFlags = append(ldFlags,
 		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.Name=%s", xstrings.Title(c.app.Name)),
 		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.AppName=%sd", c.app.Name),
-		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.Version=%s", c.sourceVersion.tag),
+		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.Version=v%s", c.sourceVersion.tag),
 		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.Commit=%s", c.sourceVersion.hash),
 		fmt.Sprintf("-X github.com/cosmos/cosmos-sdk/version.BuildTags=%s", strings.Join(buildTags, ",")),
 		fmt.Sprintf("-X %s/cmd/%s/cmd.ChainID=%s", c.app.ImportPath, c.app.D(), chainID),
@@ -223,6 +223,7 @@ func (c *Chain) preBuild(
 		gocmd.FlagMod, gocmd.FlagModValueReadOnly,
 		gocmd.FlagTags, gocmd.Tags(buildTags...),
 		gocmd.FlagLdflags, gocmd.Ldflags(ldFlags...),
+		"-buildvcs=false",
 	}
 
 	c.ev.Send("Installing dependencies...", events.ProgressUpdate())
